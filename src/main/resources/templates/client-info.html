@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о клиенте</title>
+</head>
+<body>
+<h1>Подробная информация о клиенте</h1>
+<hr>
+<p th:text="'Фамилия: ' + ${client.getFirstName()}"></p>
+<p th:text="'Имя: ' + ${client.getSecondName()}"></p>
+<p th:text="'Номер телефона: ' + ${client.getPhoneNumber()}"></p>
+<form th:method="POST" th:action="@{/client/delete/{id}(id=${client.getId()})}" th:object="${client}" enctype="multipart/form-data">
+    <input type="submit" value="Удалить клиента"/>
+    <br>
+</form>
+</body>
+</html>
