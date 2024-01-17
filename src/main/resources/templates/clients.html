@@ -5,6 +5,21 @@
     <title>Клиенты</title>
 </head>
 <body>
-stranichka klienti
+<h1>Клиенты</h1>
+<hr>
+<div th:each="client: ${clients}">
+    <p><b th:text="'FirstName:' + ${client.getFirstName()}"></b> <a th:href="@{/client/info/{id}(id=${client.getId()})}">Подробнее...</a></p>
+    <hr>
+</div>
+<h3>создать клиента</h3>
+<form th:method="POST" th:action="@{/client/add}" th:object="${client}" enctype="multipart/form-data">
+    <label for="firstName">Введите данные клиента клиента: </label>
+    <br>
+    <input type="text" name="firstName" placeholder="Фамилия" id="firstName">
+    <input type="text" name="secondName" placeholder="Имя" id="secondName">
+    <input type="text" name="phoneNumber" placeholder="Номер телефона" id="phoneNumber">
+    <input type="submit" value="Добавить клиента"/>
+    <br>
+</form>
 </body>
 </html>
