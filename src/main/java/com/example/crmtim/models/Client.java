@@ -1,10 +1,10 @@
 package com.example.crmtim.models;
-
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "clients")
@@ -26,4 +26,12 @@ public class Client {
 
     @Column(name = "phoneNumber")
     private String phoneNumber;
+
+
+    //поле и метод записи даты времени создания клиента
+    private LocalDateTime dateOfCreated;
+    @PrePersist
+    private void init(){
+        dateOfCreated = LocalDateTime.now();
+    }
 }
