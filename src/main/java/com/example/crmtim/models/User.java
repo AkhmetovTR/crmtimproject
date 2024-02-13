@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
-
+// вместо этого класса Юзер класс Персон
 @Entity
 @Table(name = "users")
 @Data

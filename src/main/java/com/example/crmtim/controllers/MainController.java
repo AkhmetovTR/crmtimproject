@@ -1,28 +1,24 @@
 package com.example.crmtim.controllers;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import com.example.crmtim.configurations.SecurityConfig;
+import com.example.crmtim.security.PersonDetails;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+@Controller
+@RequiredArgsConstructor
 public class MainController {
     public int ID = 1;
     public int numberOfLoginsToTheSite = 1;
-    @GetMapping("/")
-    //принимаем обьект http запроса далее вытянули сессию конкретного пользователя
-    public void index(HttpServletRequest request){
-        HttpSession session = request.getSession();
-        Integer numberOfLoginsToTheSiteSession = (Integer) session.getAttribute("numberOfLoginsToTheSite");
-        Integer id = (Integer) session.getAttribute("id");
-        if(numberOfLoginsToTheSiteSession == null){
-            session.setAttribute("numberOfLoginsToTheSite", numberOfLoginsToTheSite);
-            numberOfLoginsToTheSiteSession++;
-        } else {
-            session.setAttribute("numberOfLoginsToTheSite",numberOfLoginsToTheSite++);
-        }
 
-        if (id == null){
-            session.setAttribute("id", ID);
-        }
+    @GetMapping("/index")
+    public String index() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
 
+        return "index";
     }
 }
