@@ -25,7 +25,9 @@ public class SecurityConfig{
                 .formLogin().loginPage("/authentification")
                 .loginProcessingUrl("/process_login")
                 .defaultSuccessUrl("/index",true)
-                .failureUrl("/authentification?error");
+                .failureUrl("/authentification?error")
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/authentification");
         return http.build();
     }
 
